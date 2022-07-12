@@ -14,7 +14,7 @@ imgprofileCtrl.loadImgProfile = async (req, res) => {
             path.join("controllers"), path.join("upload")
         ), 
         path.join("img_profiles",File.name)))
-        }) 
+        })
     }) 
 };
 
