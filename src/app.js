@@ -26,8 +26,8 @@ const payment = {
   discount: 0.0,
   taxes: null,
   orderId: null,
-  successUrl: "https://www.yappy.peqa.dev?pid=123123123123&status=success",
-  failUrl: "https://www.yappy.peqa.dev?pid=123123123123&status=error",
+  successUrl: href="", //https://www.yappy.peqa.dev?pid=123123123123&status=success",
+  failUrl: href="", //https://www.yappy.peqa.dev?pid=123123123123&status=error",
   tel: process.env.TEL || "66666666",
   domain: process.env.DOMAIN || "https://yappy.peqa.dev",
 };
@@ -65,8 +65,8 @@ app.use("/api/posts", require("./routes/posts"));
 app.use("/api/imgpost", require("./routes/imgpost"));
 app.use("/api/imgprofile", require("./routes/imgprofile"));
 app.use("/auth", require("./routes/auth"));
-app.use("/api/pagosbg", require("./routes/yappy"));
-/*
+//app.use("/api/pagosbg", require("./routes/yappy"));
+
 app.post("/api/pagosbg", async (req, res) => {
 
   const { name, price: subtotal } = req.body;
@@ -83,7 +83,6 @@ app.post("/api/pagosbg", async (req, res) => {
   const response = await yappyClient.getPaymentUrl(newPayment);
   res.json(response);
 });
-*/
 
 
 module.exports = app;
