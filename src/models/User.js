@@ -25,6 +25,10 @@ const User = new Schema({
     type: Number,
     default: 50,
   },
+  premiun: {
+    type: Boolean,
+    default: false,
+  },
   refreshToken: {
     type: [Session],
   },

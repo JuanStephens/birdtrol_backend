@@ -1,14 +1,27 @@
 const { Router } = require("express");
 const router = Router();
 const passport = require("passport");
-const User = require("../models/User")
 
-const { signUp, signIn } = require("../controllers/auth.controller");
-const { getToken, COOKIE_OPTIONS, getRefreshToken } = require("../authenticate");
+const {
+  signUp,
+  signIn,
+  refreshToken,
+  Me,
+  logout,
+} = require("../controllers/auth.controller");
 
-router.route("/")
-        .post(signUp)
-        .get(passport.authenticate("local"), signIn);
+const {
+        verifyUser,
+      } = require("../authenticate");
 
+router.route("/").post(signUp);
+
+router.route("/login").post(passport.authenticate("local"), signIn);
+
+router.route("/refreshToken").post(refreshToken);
+
+router.route("/me").get(verifyUser, Me);
+
+router.route("/logout").delete(verifyUser, logout);
 
 module.exports = router;
