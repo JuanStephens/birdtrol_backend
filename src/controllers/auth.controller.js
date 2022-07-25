@@ -69,7 +69,6 @@ authCtrl.signIn = (req, res, next) => {
 authCtrl.refreshToken = (req, res, next) => {
   const { signedCookies = {} } = req;
   const { refreshToken } = signedCookies;
-
   if (refreshToken) {
     try {
       const payload = jwt.verify(

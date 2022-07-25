@@ -5,7 +5,7 @@ const Post = require("../models/Post");
 postCtrl.getPosts = async (req, res) => {
   try {
     console.log(Post);
-    const posts = await Post.find();
+    const posts = await Post.find().sort({createdAt:-1});
     res.json(posts);
   } catch (err) {
     res.status(400).json({
