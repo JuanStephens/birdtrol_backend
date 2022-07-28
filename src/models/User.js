@@ -21,6 +21,14 @@ const User = new Schema({
     type: String,
     default: "local",
   },
+  profileImage: {
+    type: String,
+    default: ""
+  },
+  descriptionProfile: {
+    type: String,
+    default: ""
+  },
   points: {
     type: Number,
     default: 50,

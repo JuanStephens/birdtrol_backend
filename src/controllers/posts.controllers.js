@@ -5,7 +5,7 @@ const Post = require("../models/Post");
 postCtrl.getPosts = async (req, res) => {
   try {
     console.log(Post);
-    const posts = await Post.find().sort({createdAt:-1});
+    const posts = await Post.find().sort({ createdAt: -1 });
     res.json(posts);
   } catch (err) {
     res.status(400).json({
@@ -35,23 +35,29 @@ postCtrl.createPost = async (req, res) => {
 
 postCtrl.deletePost = async (req, res) => {
   const { id } = req.params;
-  console.log(id);
-  await Post.findByIdAndDelete(id);
-  res.json("Post deleted");
+  try {
+    await Post.findByIdAndDelete(id);
+    res.json("Post deleted");
+  } catch (e) {
+    res.json(e.errmsg);
+  }
 };
 
 postCtrl.updatePost = async (req, res) => {
   const { id, text } = req.body;
-  console.log(id + " " + text);
-  await Post.updateOne(
-    { _id: id },
-    {
-      $set: {
-        text: text,
-      },
-    }
-  );
-  res.json("Post update");
+  try {
+    await Post.updateOne(
+      { _id: id },
+      {
+        $set: {
+          text: text,
+        },
+      }
+    );
+    res.json("Post update");
+  } catch (e) {
+    res.json(e.errmsg);
+  }
 };
 
 module.exports = postCtrl;

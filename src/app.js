@@ -11,6 +11,7 @@ const passport = require("passport")
 require("./strategies/JwtStrategy")
 require("./strategies/LocalStrategy")
 require("./authenticate");
+const User = require("./models/User");
 
 const app = express();
 
@@ -65,9 +66,17 @@ app.use("/api/posts", require("./routes/posts"));
 app.use("/api/imgpost", require("./routes/imgpost"));
 app.use("/api/imgprofile", require("./routes/imgprofile"));
 app.use("/auth", require("./routes/auth"));
+app.use("/api/user", require("./routes/user"));
 //app.use("/api/pagosbg", require("./routes/yappy"));
 
 app.post("/api/pagosbg", async (req, res) => {
+
+  let body = req.body;
+  await User.updateOne({ _id: body.id }, {
+    $set: {
+        premiun: true
+    }
+  });
 
   const { name, price: subtotal } = req.body;
   const uuid = uuidv4();
